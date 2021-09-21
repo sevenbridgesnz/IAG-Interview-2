@@ -13,7 +13,6 @@ import { Backdrop, CircularProgress } from '@material-ui/core';
 
 
 const CarList = () => {
-
       const models = useSelector((state) => state.models);
       const dispatch = useDispatch();
 
@@ -29,7 +28,7 @@ const CarList = () => {
         setFilter(event.target.value);
       }
 
-      const onMakeFilterChangedHandler = (makeName) => {
+      const onMakeSelectChangedHandler = (makeName) => {
         setCurrentModel(makeName);
       }
 
@@ -42,20 +41,19 @@ const CarList = () => {
             </Backdrop>
 
             <FormControl variant="standard" sx={{ m:2, minWidth: 120 }}>
-                <MakeSelect id="makeSelect" onFilterChangedHandler={onMakeFilterChangedHandler}></MakeSelect>
+                <MakeSelect id="makeSelect" onFilterSelectHandler={onMakeSelectChangedHandler}></MakeSelect>
                 <TextField id="standard-basic" label="Filter"  onChange={onFilterChangeHandler}/>
             </FormControl>
             
             {models.data.status === 'error' && <h4>There was an error fetching the data</h4>}
             {models.data.status === 'idle' &&
-                <Paper>
-                
+                <Paper>                
                     <Table aria-label="simple table">
                         <TableHead>
-                        <TableRow>
-                            <TableCell>Name</TableCell>
-                            <TableCell>Years Available</TableCell>
-                        </TableRow>
+                            <TableRow>
+                                <TableCell>Name</TableCell>
+                                <TableCell>Years Available</TableCell>
+                            </TableRow>
                         </TableHead>
                         <TableBody>
                         
@@ -65,9 +63,9 @@ const CarList = () => {
                                 })
                             .map(model => (
                                 <TableRow key={model.name + model.yearsAvailable}>
-                                <TableCell component="th" scope="row">
-                                    {model.name}
-                                </TableCell>
+                                    <TableCell component="th" scope="row">
+                                        {model.name}
+                                    </TableCell>
                                 <TableCell>{model.yearsAvailable}</TableCell>
                                 </TableRow>
                         ))} 

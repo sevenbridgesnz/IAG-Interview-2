@@ -4,11 +4,12 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import CarList from './components/CarList';
+import { Fragment } from 'react';
 
 
 function App() {
     return (
-      <div>
+      <Fragment>
         <AppBar position="static">
           <Toolbar variant="dense">
             <Typography variant="h6" color="inherit">
@@ -17,7 +18,7 @@ function App() {
           </Toolbar>
         </AppBar>
         <CarList></CarList>
-      </div>
+      </Fragment>
     );
 }
 

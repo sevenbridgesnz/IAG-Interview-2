@@ -16,24 +16,22 @@ const MakeSelect = (props) => {
 
     const onChangeHandler = (event) => {
         setValue(event.target.value);
-        props.onFilterChangedHandler(event.target.value);
+        props.onFilterSelectHandler(event.target.value);
     }
 
-
     return (
-                <Select
-                        id="modelSelect"
-                        label="Model"
-                        onChange={onChangeHandler}
-                        value={value}
-                        variant="standard"
-                        >
-                    {makes.map((make, index) => 
-                                <MenuItem key={index} value={make}>{make}</MenuItem>
-                            )}
-                </Select>  
-
-            )
+            <Select
+                    id="modelSelect"
+                    label="Model"
+                    onChange={onChangeHandler}
+                    value={value}
+                    variant="standard"
+                    >
+                {makes.map((make, index) => 
+                            <MenuItem key={index} value={make}>{make}</MenuItem>
+                        )}
+            </Select>  
+        )
 }
 
 export default MakeSelect;

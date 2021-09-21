@@ -13,7 +13,7 @@ namespace VehicleSummary.Api.Services.VehicleSummary
     public class VehicleSummaryService : IVehicleSummaryService
     {
         private const string _subscriptionKey = "72ec78fb999e43be8dbdac94d7236cae";
-        private const int _cacheExpiryMinutes = 1;
+        private const int _cacheExpiryMinutes = 15;
         static SemaphoreSlim _semaphoreSlim = new SemaphoreSlim(1, 1);
 
         private Dictionary<string, VehicleSummaryCache> _vehicleSummaryCache = new Dictionary<string, VehicleSummaryCache>();
@@ -57,8 +57,7 @@ namespace VehicleSummary.Api.Services.VehicleSummary
         {
             var ageMinutes = (DateTime.Now - cacheDate).TotalMinutes;
 
-            // return ageMinutes > _cacheExpiryMinutes;
-            return true;
+            return ageMinutes > _cacheExpiryMinutes;
         }
 
         private async Task<VehicleSummaryResponse> VehicleSummaryResponse(string make)

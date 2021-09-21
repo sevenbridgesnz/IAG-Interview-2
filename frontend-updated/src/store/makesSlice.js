@@ -7,13 +7,10 @@ const makeSlice = createSlice ({
     },
     reducers: {
         replaceData(state, action) {
-            console.log('Redux level');
-            console.log(action.payload);
             state.items = action.payload;
         }
     }
 });
-
 
 export const fetchMakesData = () => {
     return async dispatch => {
@@ -38,10 +35,7 @@ export const fetchMakesData = () => {
 
         try {
             const makesData = await fetchData();
-            console.log('Makes data fetched');
-            console.log(makesData);
 
-            //update redux slice
             dispatch(makeActions.replaceData(makesData));
         } catch (error) {
             console.log('Error fetching makes data');

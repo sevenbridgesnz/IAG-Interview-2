@@ -54,7 +54,6 @@ export const fetchModelsData = (makeName) => {
             dispatch(modelActions.fetching(makeName));
             const modelsData = await fetchData();
 
-            //update redux slice
             dispatch(modelActions.replaceData(modelsData));
         } catch (error) {
             dispatch(modelActions.error(makeName));
