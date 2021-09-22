@@ -13,24 +13,24 @@ import { Backdrop, CircularProgress } from '@material-ui/core';
 
 
 const CarList = () => {
-      const models = useSelector((state) => state.models);
-      const dispatch = useDispatch();
+    const models = useSelector((state) => state.models);
+    const dispatch = useDispatch();
 
-      const [filter, setFilter] = useState('');
-      const [currentModel, setCurrentModel] = useState('Lotus');
-  
-      useEffect(() => {
-          dispatch(fetchModelsData(currentModel));
-        }, [dispatch, currentModel]
-      );
+    const [filter, setFilter] = useState('');
+    const [currentModel, setCurrentModel] = useState('Lotus');
 
-      const onFilterChangeHandler = (event) => {
+    useEffect(() => {
+        dispatch(fetchModelsData(currentModel));
+    }, [dispatch, currentModel]
+    );
+
+    const onFilterChangeHandler = (event) => {
         setFilter(event.target.value);
-      }
+    }
 
-      const onMakeSelectChangedHandler = (makeName) => {
+    const onMakeSelectChangedHandler = (makeName) => {
         setCurrentModel(makeName);
-      }
+    }
 
     return (
         <Fragment>
@@ -40,14 +40,14 @@ const CarList = () => {
                 <CircularProgress color="inherit" />
             </Backdrop>
 
-            <FormControl variant="standard" sx={{ m:2, minWidth: 120 }}>
+            <FormControl variant="standard" sx={{ m: 2, minWidth: 120 }}>
                 <MakeSelect id="makeSelect" onFilterSelectHandler={onMakeSelectChangedHandler}></MakeSelect>
-                <TextField id="standard-basic" label="Filter"  onChange={onFilterChangeHandler}/>
+                <TextField id="standard-basic" label="Filter" onChange={onFilterChangeHandler} />
             </FormControl>
-            
+
             {models.data.status === 'error' && <h4>There was an error fetching the data</h4>}
             {models.data.status === 'idle' &&
-                <Paper>                
+                <Paper>
                     <Table aria-label="simple table">
                         <TableHead>
                             <TableRow>
@@ -56,24 +56,24 @@ const CarList = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                        
-                        {models.data.models
-                            .filter(function (e) {
-                                return filter.length === 0 || e.name.toUpperCase().includes(filter.toUpperCase()) ;
+
+                            {models.data.models
+                                .filter(function (e) {
+                                    return filter.length === 0 || e.name.toUpperCase().includes(filter.toUpperCase());
                                 })
-                            .map(model => (
-                                <TableRow key={model.name + model.yearsAvailable}>
-                                    <TableCell component="th" scope="row">
-                                        {model.name}
-                                    </TableCell>
-                                <TableCell>{model.yearsAvailable}</TableCell>
-                                </TableRow>
-                        ))} 
+                                .map(model => (
+                                    <TableRow key={model.name + model.yearsAvailable}>
+                                        <TableCell component="th" scope="row">
+                                            {model.name}
+                                        </TableCell>
+                                        <TableCell>{model.yearsAvailable}</TableCell>
+                                    </TableRow>
+                                ))}
                         </TableBody>
                     </Table>
                 </Paper>
             }
-            </Fragment>
+        </Fragment>
     );
 }
 

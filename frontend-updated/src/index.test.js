@@ -7,14 +7,14 @@ import store from './store/index';
 
 
 describe('Main App', () => {
-    configure({adapter: new Adapter()});
+    configure({ adapter: new Adapter() });
 
     test('Renders App without crashing', () => {
         shallow(<App />);
-    });       
+    });
 
-    test('Renders whole app without crashing', () => {        
-        render(<Provider store = {store}> <App /></Provider>);      
-    });       
+    test('Renders whole app without crashing', () => {
+        render(<Provider store={store}> <App /></Provider>);
+    });
 
 });

@@ -11,7 +11,7 @@ const MakeSelect = (props) => {
 
     useEffect(() => {
         dispatch(fetchMakesData(value));
-      }, [dispatch, value]
+    }, [dispatch, value]
     );
 
     const onChangeHandler = (event) => {
@@ -20,18 +20,18 @@ const MakeSelect = (props) => {
     }
 
     return (
-            <Select
-                    id="modelSelect"
-                    label="Model"
-                    onChange={onChangeHandler}
-                    value={value}
-                    variant="standard"
-                    >
-                {makes.map((make, index) => 
-                            <MenuItem key={index} value={make}>{make}</MenuItem>
-                        )}
-            </Select>  
-        )
+        <Select
+            id="modelSelect"
+            label="Model"
+            onChange={onChangeHandler}
+            value={value}
+            variant="standard"
+        >
+            {makes.map((make, index) =>
+                <MenuItem key={index} value={make}>{make}</MenuItem>
+            )}
+        </Select>
+    )
 }
 
 export default MakeSelect;

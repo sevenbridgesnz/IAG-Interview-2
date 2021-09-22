@@ -8,18 +8,18 @@ import { Fragment } from 'react';
 
 
 function App() {
-    return (
-      <Fragment>
-        <AppBar position="static">
-          <Toolbar variant="dense">
-            <Typography variant="h6" color="inherit">
-              Vehicle List
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <CarList></CarList>
-      </Fragment>
-    );
+  return (
+    <Fragment>
+      <AppBar position="static">
+        <Toolbar variant="dense">
+          <Typography variant="h6" color="inherit">
+            Vehicle List
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <CarList></CarList>
+    </Fragment>
+  );
 }
 
 export default App;

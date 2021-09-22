@@ -8,8 +8,8 @@ const initialState = {
     }
 }
 
-const modelSlice = createSlice ({
-    name: 'model', 
+const modelSlice = createSlice({
+    name: 'model',
     initialState: initialState,
     reducers: {
         replaceData(state, action) {
@@ -33,20 +33,19 @@ export const fetchModelsData = (makeName) => {
     return async dispatch => {
         const fetchData = async () => {
             const response = await fetch(
-                'https://localhost:44387/vehicle-checks/makes/'+makeName,{ }
+                'https://localhost:44387/vehicle-checks/makes/' + makeName, {}
             );
 
             if (!response.ok) {
                 throw new Error('Could not fetch models data');
             }
-            
+
             let data = await response.json();
 
-            if (!data)
-            {
-                data = [];    
+            if (!data) {
+                data = [];
             }
-            
+
             return data;
         }
 

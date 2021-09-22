@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const makeSlice = createSlice ({
-    name: 'make', 
+const makeSlice = createSlice({
+    name: 'make',
     initialState: {
         items: []
     },
@@ -16,20 +16,19 @@ export const fetchMakesData = () => {
     return async dispatch => {
         const fetchData = async () => {
             const response = await fetch(
-                'https://localhost:44387/vehicle-checks/makes/',{ }
+                'https://localhost:44387/vehicle-checks/makes/', {}
             );
 
             if (!response.ok) {
                 throw new Error('Could not fetch makes data');
             }
-            
+
             let data = await response.json();
 
-            if (!data)
-            {
-                data = [];    
+            if (!data) {
+                data = [];
             }
-            
+
             return data;
         }
 
