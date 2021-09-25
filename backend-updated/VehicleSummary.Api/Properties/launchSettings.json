@@ -20,7 +20,7 @@
     "VehicleSummary.Api": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/values",
+      "launchUrl": "vehicle-checks/makes/",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

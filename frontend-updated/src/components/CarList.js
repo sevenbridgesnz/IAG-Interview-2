@@ -45,7 +45,7 @@ const CarList = () => {
                 <TextField id="filter-id" label="Filter" onChange={onFilterChangeHandler} />
             </FormControl>
 
-            {models.data.status === 'error' && <h4>There was an error fetching the data</h4>}
+            {models.data.status === 'error' && <h4 id="load-error-label">There was an error fetching the data</h4>}
             {models.data.status === 'idle' &&
                 <Paper>
                     <Table aria-label="simple table">

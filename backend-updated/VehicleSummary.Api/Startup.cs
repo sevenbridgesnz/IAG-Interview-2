@@ -52,7 +52,7 @@ namespace VehicleSummary.Api
             app.UseCors(x => x
                 .AllowAnyMethod()
                 .AllowAnyHeader()
-                .SetIsOriginAllowed(origin => true) // allow any origin
+                .AllowAnyOrigin()
                 .AllowCredentials()); // allow credentials
 
             app.UseHttpsRedirection();
