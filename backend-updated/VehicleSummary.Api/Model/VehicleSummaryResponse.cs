@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using VehicleSummary.Api.Model;
 
-namespace VehicleSummary.Api.Services.VehicleSummary
+namespace VehicleSummary.Api.Model
 {
     public class VehicleSummaryResponse
     {

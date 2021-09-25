@@ -1,4 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
+import configData from './../config.json';
 
 const makeSlice = createSlice({
     name: 'make',
@@ -15,15 +17,18 @@ const makeSlice = createSlice({
 export const fetchMakesData = () => {
     return async dispatch => {
         const fetchData = async () => {
-            const response = await fetch(
-                'https://localhost:44387/vehicle-checks/makes/', {}
-            );
+            const headers = {
+                'Access-Control-Allow-Origin': '*'
+            };
 
-            if (!response.ok) {
+
+            const response = await axios.get(configData.API_BASE_URL + 'vehicle-checks/makes', { headers });
+
+            if (response.status !== 200) {
                 throw new Error('Could not fetch makes data');
             }
 
-            let data = await response.json();
+            let data = await response.data.makes;
 
             if (!data) {
                 data = [];
@@ -38,6 +43,7 @@ export const fetchMakesData = () => {
             dispatch(makeActions.replaceData(makesData));
         } catch (error) {
             console.log('Error fetching makes data');
+            console.log(error);
         }
     }
 }

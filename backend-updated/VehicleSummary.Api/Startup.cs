@@ -10,14 +10,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using VehicleSummary.Api.Interfaces;
 using VehicleSummary.Api.Services.VehicleSummary;
 
 namespace VehicleSummary.Api
 {
     public class Startup
     {
-        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -34,6 +33,7 @@ namespace VehicleSummary.Api
 
             // add the DI stuff here
             services.AddSingleton<IVehicleSummaryService, VehicleSummaryService>();
+            services.AddSingleton<IRestDataService, RestDataService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,17 +49,14 @@ namespace VehicleSummary.Api
                 app.UseHsts();
             }
 
-
             app.UseCors(x => x
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .SetIsOriginAllowed(origin => true) // allow any origin
                 .AllowCredentials()); // allow credentials
 
-
             app.UseHttpsRedirection();
             app.UseMvc();
-
         }
     }
 }

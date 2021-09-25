@@ -42,7 +42,7 @@ const CarList = () => {
 
             <FormControl variant="standard" sx={{ m: 2, minWidth: 120 }}>
                 <MakeSelect id="makeSelect" onFilterSelectHandler={onMakeSelectChangedHandler}></MakeSelect>
-                <TextField id="standard-basic" label="Filter" onChange={onFilterChangeHandler} />
+                <TextField id="filter-id" label="Filter" onChange={onFilterChangeHandler} />
             </FormControl>
 
             {models.data.status === 'error' && <h4>There was an error fetching the data</h4>}

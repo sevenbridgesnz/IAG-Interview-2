@@ -4,19 +4,32 @@ using System.Threading;
 using System.Threading.Tasks;
 using Flurl;
 using Flurl.Http;
+using VehicleSummary.Api.Interfaces;
 using VehicleSummary.Api.Model;
 
 namespace VehicleSummary.Api.Services.VehicleSummary
-
 {
-
     public class VehicleSummaryService : IVehicleSummaryService
     {
-        private const string _subscriptionKey = "72ec78fb999e43be8dbdac94d7236cae";
-        private const int _cacheExpiryMinutes = 15;
+        private const int _cacheExpiryMinutes = 60;
         static SemaphoreSlim _semaphoreSlim = new SemaphoreSlim(1, 1);
+        IRestDataService _restDataService;
 
         private Dictionary<string, VehicleSummaryCache> _vehicleSummaryCache = new Dictionary<string, VehicleSummaryCache>();
+
+        public VehicleSummaryService(IRestDataService restDataService)
+        {
+            _restDataService = restDataService;
+        }
+
+        public async Task<VehicleMakesResponse> GetMakes()
+        {
+            List<string> makes = await getMakes();
+
+            VehicleMakesResponse response = new VehicleMakesResponse(makes);
+
+            return response;
+        }
 
         public async Task<VehicleSummaryResponse> GetSummaryByMake(string make)
         {
@@ -62,6 +75,8 @@ namespace VehicleSummary.Api.Services.VehicleSummary
 
         private async Task<VehicleSummaryResponse> VehicleSummaryResponse(string make)
         {
+            make = make.ToUpper();
+
             VehicleSummaryResponse vehicleSummaryResponse = new VehicleSummaryResponse();
 
             List<VehicleSummaryModel> models = new List<VehicleSummaryModel>();
@@ -83,30 +98,25 @@ namespace VehicleSummary.Api.Services.VehicleSummary
             return vehicleSummaryResponse;
         }
 
-        //Here's a small helper. We're using Flurl for http requests. (Change it if you wish)
-        //https://flurl.dev/
-
         async Task<List<string>> getModelsOfMake(string make)
-        {   
-            var modelsUrl = "https://api.iag.co.nz/vehicles/vehicletypes/makes/" + make + "/models?api-version=v1";
-
-            var response = await modelsUrl
-                .WithHeader("Ocp-Apim-Subscription-Key", _subscriptionKey)
-                .GetJsonAsync<List<string>>();
+        {
+            var response = await _restDataService.GetModelsOfMake(make);
                 
             return response;
         }
 
         async Task<List<int>> geYearsOfModel(string make, string model)
         {
-            var modelsUrl = "https://api.iag.co.nz/vehicles/vehicletypes/makes/"+ make + "/models/"+ model + "/years?api-version=v1";
-
-            var response = await modelsUrl
-                .WithHeader("Ocp-Apim-Subscription-Key", _subscriptionKey)
-                .GetJsonAsync<List<int>>();
+            var response = await _restDataService.GetYearsOfModel(make, model);
 
             return response;
         }
 
+        async Task<List<string>> getMakes()
+        {
+            var response = await _restDataService.GetMakes();
+
+            return response;
+        }
     }
 }

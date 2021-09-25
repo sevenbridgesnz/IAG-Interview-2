@@ -2,6 +2,8 @@ using System.Threading.Tasks;
 using FakeItEasy;
 using FluentAssertions;
 using VehicleSummary.Api.Controllers;
+using VehicleSummary.Api.Interfaces;
+using VehicleSummary.Api.Model;
 using VehicleSummary.Api.Services.VehicleSummary;
 using Xunit;
 
@@ -22,23 +24,15 @@ namespace VehicleSummary.UnitTests.ControllersTests.VehicleChecksControllerTests
         [Fact]
         public async Task Call_VehicleSummaryService_with_given_make()
         {
-            var make = "First";
-
+            var make = "Lotus";
 
             A.CallTo(() => _fakeVehicleSummaryService.GetSummaryByMake(make))
-                .Returns(new VehicleSummaryResponse());
-            
+                .Returns(new VehicleSummaryResponse());       
 
             var response = await _sut.Makes(make);
 
-
             A.CallTo(() => _fakeVehicleSummaryService.GetSummaryByMake(make))
                 .MustHaveHappened();
-
-
-
-
-
         }
     }
 }

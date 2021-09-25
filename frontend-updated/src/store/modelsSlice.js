@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const initialState = {
     data: {
@@ -32,15 +33,13 @@ const modelSlice = createSlice({
 export const fetchModelsData = (makeName) => {
     return async dispatch => {
         const fetchData = async () => {
-            const response = await fetch(
-                'https://localhost:44387/vehicle-checks/makes/' + makeName, {}
-            );
+            const response = await axios.get('https://localhost:44387/vehicle-checks/makes/' + makeName);
 
-            if (!response.ok) {
+            if (response.status !== 200) {
                 throw new Error('Could not fetch models data');
             }
 
-            let data = await response.json();
+            let data = await response.data;
 
             if (!data) {
                 data = [];
