@@ -5,12 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 using Flurl.Http;
 using Newtonsoft.Json;
+using Microsoft.Extensions.Configuration;
 
 namespace VehicleSummary.IntegrationTests.VehicleAPITests
 {
     public class VehicleAPITests
     {
-        private string _apiURL = "https://localhost:5001/";
+        private string _apiURL;
+
+        public VehicleAPITests()
+        {
+            var config = new ConfigurationBuilder()
+                .AddJsonFile("config.json")
+                .Build();
+            _apiURL = config["api-url"];
+        }
 
         [Test]
         public async Task TestMakesAsync()

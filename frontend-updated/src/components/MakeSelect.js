@@ -10,7 +10,7 @@ const MakeSelect = (props) => {
     const [value, setValue] = useState('');
 
     useEffect(() => {
-        //dispatch(fetchMakesData());
+        dispatch(fetchMakesData());
 
     }, [dispatch, value]
     );

@@ -1,0 +1,5 @@
+﻿{
+  "api-url": "https://localhost:44387/",
+  "site-url": "http://localhost:3000",
+  "isHeadless":  "false"
+}

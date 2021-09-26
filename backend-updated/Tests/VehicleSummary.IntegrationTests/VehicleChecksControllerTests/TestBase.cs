@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Microsoft.Extensions.Configuration;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
@@ -11,8 +12,18 @@ namespace VehicleSummary.IntegrationTests.VehicleChecksControllerTests
     {
         protected IWebDriver _webDriver;
         protected WebDriverWait _wait;
-        protected bool _isHeadless = false;
-        protected string _websiteURL = "http://localhost:3000";
+        protected bool _isHeadless;
+        protected string _websiteURL;
+
+        public TestBase()
+        {
+            var config = new ConfigurationBuilder()
+                .AddJsonFile("config.json")
+                .Build();
+
+            _websiteURL = config["site-url"];
+            _isHeadless = config["isHeadless"] == "true";
+        }
 
         [SetUp]
         public void start_Browser()
