@@ -3,9 +3,6 @@ import configData from './../config.json';
 
 export const handlers = [
     rest.get(configData.API_BASE_URL + 'vehicle-checks/makes/', (req, res, ctx) => {
-
-        console.log('Fetching fake makes');
-
         return res(
             ctx.json(['Lotus', 'BMW', 'Skoda'])
         )
