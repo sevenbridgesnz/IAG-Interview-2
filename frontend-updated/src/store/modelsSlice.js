@@ -39,7 +39,6 @@ export const fetchModelsData = (makeName) => {
                 'Access-Control-Allow-Origin': '*'
             };
 
-
             const response = await axios.get(configData.API_BASE_URL + 'vehicle-checks/makes/' + makeName, { headers });
 
             if (response.status !== 200) {

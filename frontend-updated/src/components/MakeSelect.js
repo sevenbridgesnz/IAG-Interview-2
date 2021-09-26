@@ -10,7 +10,7 @@ const MakeSelect = (props) => {
     const [value, setValue] = useState('');
 
     useEffect(() => {
-        dispatch(fetchMakesData(value));
+        //dispatch(fetchMakesData());
 
     }, [dispatch, value]
     );
@@ -26,8 +26,6 @@ const MakeSelect = (props) => {
         setValue(event.target.value);
         props.onFilterSelectHandler(event.target.value);
     }
-
-    // console.log(makes);
 
     return (
         <Select

@@ -6,17 +6,12 @@ using VehicleSummary.Api.Services.VehicleSummary;
 
 namespace VehicleSummary.Api.Model
 {
-    public class VehicleSummaryCache
+    public class VehicleSummaryCacheRecord
     {
         public VehicleSummaryResponse VehicleSummaryResponse { get; set; }
         public DateTime Created { get; set; }
 
-        public VehicleSummaryCache()
-        {
-
-        }
-
-        public VehicleSummaryCache(VehicleSummaryResponse vehicleSummaryResponse)
+        public VehicleSummaryCacheRecord(VehicleSummaryResponse vehicleSummaryResponse)
         {
             VehicleSummaryResponse = vehicleSummaryResponse;
             Created = DateTime.Now;

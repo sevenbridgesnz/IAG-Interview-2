@@ -8,15 +8,14 @@ namespace VehicleSummary.Api.Model
         public string Make { get; set; }
         public List<VehicleSummaryModel> Models { get; set; }
 
-        public VehicleSummaryResponse()
-        {
-
-        }
-
         public VehicleSummaryResponse(string make, List<VehicleSummaryModel> models)
         {
             Make = make;
             Models = models;
+        }
+
+        public VehicleSummaryResponse()
+        {
         }
 
         public string ToString()

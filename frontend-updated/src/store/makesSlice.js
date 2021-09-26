@@ -21,14 +21,15 @@ export const fetchMakesData = () => {
                 'Access-Control-Allow-Origin': '*'
             };
 
-
-            const response = await axios.get(configData.API_BASE_URL + 'vehicle-checks/makes', { headers });
+            const url = configData.API_BASE_URL + 'vehicle-checks/makes/';
+            const response = await axios.get(url, { headers });
 
             if (response.status !== 200) {
                 throw new Error('Could not fetch makes data');
             }
 
-            let data = await response.data.makes;
+            let dataRaw = await response.data;
+            let data = dataRaw.makes;
 
             if (!data) {
                 data = [];

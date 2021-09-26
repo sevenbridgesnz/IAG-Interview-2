@@ -39,7 +39,7 @@ describe('CarList Component', () => {
 
         const myFilterField = screen.getByRole('textbox', { name: 'Filter' });
 
-        fireEvent.change(myFilterField, { target: { value: 'el' } });
+        await fireEvent.change(myFilterField, { target: { value: 'el' } });
 
         const myRows = await screen.findAllByRole('row');
 

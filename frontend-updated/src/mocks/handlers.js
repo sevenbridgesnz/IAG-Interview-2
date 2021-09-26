@@ -1,13 +1,17 @@
 import { rest } from 'msw';
+import configData from './../config.json';
 
 export const handlers = [
-    rest.get("https://localhost:44387/vehicle-checks/makes", (req, res, ctx) => {
+    rest.get(configData.API_BASE_URL + 'vehicle-checks/makes/', (req, res, ctx) => {
+
+        console.log('Fetching fake makes');
+
         return res(
             ctx.json(['Lotus', 'BMW', 'Skoda'])
         )
     }),
 
-    rest.get("https://localhost:44387/vehicle-checks/makes/:makeName", (req, res, ctx) => {
+    rest.get(configData.API_BASE_URL + "vehicle-checks/makes/:makeName", (req, res, ctx) => {
         const { makeName } = req.params
 
         if (makeName.toUpperCase() === 'LOTUS') {

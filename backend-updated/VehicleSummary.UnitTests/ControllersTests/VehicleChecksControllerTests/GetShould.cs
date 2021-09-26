@@ -11,13 +11,13 @@ namespace VehicleSummary.UnitTests.ControllersTests.VehicleChecksControllerTests
 {
     public class GetShould
     {
-        private readonly VehicleChecksController _sut;
+        private readonly VehicleChecksController vehicleChecksController;
         private readonly IVehicleSummaryService _fakeVehicleSummaryService;
 
         public GetShould()
         {
             _fakeVehicleSummaryService = A.Fake<IVehicleSummaryService>();
-            _sut = new VehicleChecksController(_fakeVehicleSummaryService);
+            vehicleChecksController = new VehicleChecksController(_fakeVehicleSummaryService);
         }
         
 
@@ -29,7 +29,7 @@ namespace VehicleSummary.UnitTests.ControllersTests.VehicleChecksControllerTests
             A.CallTo(() => _fakeVehicleSummaryService.GetSummaryByMake(make))
                 .Returns(new VehicleSummaryResponse());       
 
-            var response = await _sut.Makes(make);
+            var response = await vehicleChecksController.Makes(make);
 
             A.CallTo(() => _fakeVehicleSummaryService.GetSummaryByMake(make))
                 .MustHaveHappened();

@@ -11,32 +11,8 @@ describe('MakeSelect Component', () => {
     </Provider>
     );
 
-    const mySelectControl = await screen.findByDisplayValue('Lotus');
+    const mySelectControl = await screen.findByRole('button');
 
     expect(mySelectControl).toBeInTheDocument();
   });
-
-  /*
-  test('Select component renders and emits value', async () => {
-    let selectedValue = '';
-
-    const onMakeSelectChangedHandler = (val) => {
-      selectedValue = val;
-      console.log('value emitted');
-    }
-
-    render(<Provider store={store}>
-      <MakeSelect id="makeSelect" onFilterSelectHandler={onMakeSelectChangedHandler}></MakeSelect>
-    </Provider>
-    );
-
-    const mySelectControl = await screen.findByDisplayValue('Lotus');
-
-    console.log('selected value is');
-    console.log(selectedValue);
-
-    expect(mySelectControl).toBeInTheDocument();
-    //expect(selectedValue).toBe('Lotus');
-  });
-*/
 });

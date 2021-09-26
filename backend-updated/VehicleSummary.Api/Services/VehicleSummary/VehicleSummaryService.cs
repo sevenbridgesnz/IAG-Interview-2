@@ -15,7 +15,7 @@ namespace VehicleSummary.Api.Services.VehicleSummary
         static SemaphoreSlim _semaphoreSlim = new SemaphoreSlim(1, 1);
         IRestDataService _restDataService;
 
-        private Dictionary<string, VehicleSummaryCache> _vehicleSummaryCache = new Dictionary<string, VehicleSummaryCache>();
+        private Dictionary<string, VehicleSummaryCacheRecord> _vehicleSummaryCache = new Dictionary<string, VehicleSummaryCacheRecord>();
 
         public VehicleSummaryService(IRestDataService restDataService)
         {
@@ -52,7 +52,7 @@ namespace VehicleSummary.Api.Services.VehicleSummary
                     {
                         VehicleSummaryResponse vehicleSummaryResponseCalc = await VehicleSummaryResponse(make);
 
-                        _vehicleSummaryCache[upMake] = new VehicleSummaryCache(vehicleSummaryResponseCalc);
+                        _vehicleSummaryCache[upMake] = new VehicleSummaryCacheRecord(vehicleSummaryResponseCalc);
                     }
                 }
                 finally
@@ -77,8 +77,6 @@ namespace VehicleSummary.Api.Services.VehicleSummary
         {
             make = make.ToUpper();
 
-            VehicleSummaryResponse vehicleSummaryResponse = new VehicleSummaryResponse();
-
             List<VehicleSummaryModel> models = new List<VehicleSummaryModel>();
 
             List<string> modelsOfMake = await getModelsOfMake(make);
@@ -92,8 +90,7 @@ namespace VehicleSummary.Api.Services.VehicleSummary
                 models.Add(summaryModel);
             }
 
-            vehicleSummaryResponse.Make = make;
-            vehicleSummaryResponse.Models = models;
+            VehicleSummaryResponse vehicleSummaryResponse = new VehicleSummaryResponse(make, models);
 
             return vehicleSummaryResponse;
         }
